@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 50%;
+	width: 30%;
 	padding: 2rem 1.5rem;
 	background-color: #e2e8f0;
 	border-radius: 10px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	z-index: 10000;
+	form {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
 `;
 
 export const Nav = styled.nav`

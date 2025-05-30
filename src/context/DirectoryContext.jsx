@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react';
 import directoryServices from '../services/directoryServices';
 
@@ -9,7 +10,7 @@ export function useDirectory() {
 
 export function DirectoryProvider({ children }) {
 	const [directories, setDirectories] = useState([]);
-	const [modalOpen, setModalOpen] = useState(false);
+	const [modalOpenD, setModalOpenD] = useState(false);
 	const [editDirectory, setEditDirectory] = useState(null);
 
 	// Carrega diretórios ao iniciar
@@ -23,26 +24,52 @@ export function DirectoryProvider({ children }) {
 	}
 
 	async function addDirectory(data) {
-		await directoryServices.createDirectory(data);
-		fetchDirectories();
+		const tempId = Date.now();
+		const tempDirectory = { id: tempId, ...data };
+		setDirectories((prev) => [...prev, tempDirectory]); // Adiciona imediatamente
+
+		try {
+			await directoryServices.createDirectory(data);
+			// Atualize a lista com o que veio da API (ou faça fetchDirectories())
+			fetchDirectories();
+		} catch {
+			// Se der erro, remova o temporário
+			setDirectories((prev) => prev.filter((d) => d.id !== tempId));
+		}
 	}
 
 	async function updateDirectory(id, data) {
-		await directoryServices.updateDirectory(id, data);
-		fetchDirectories();
+		const oldDirectory = directories.find((d) => d.id === id);
+		setDirectories((prev) => prev.map((d) => (d.id === id ? { ...d, ...data } : d)));
+
+		try {
+			await directoryServices.updateDirectory(id, data);
+			fetchDirectories();
+		} catch {
+			// Se der erro, volta ao antigo
+			setDirectories((prev) => prev.map((d) => (d.id === id ? oldDirectory : d)));
+		}
 	}
 
 	async function deleteDirectory(id) {
-		await directoryServices.deleteDirectory(id);
-		fetchDirectories();
+		const oldDirectories = directories;
+		setDirectories((prev) => prev.filter((d) => d.id !== id));
+
+		try {
+			await directoryServices.deleteDirectory(id);
+			fetchDirectories();
+		} catch {
+			// Se der erro, volta ao antigo
+			setDirectories(oldDirectories);
+		}
 	}
 
 	return (
 		<DirectoryContext.Provider
 			value={{
 				directories,
-				modalOpen,
-				setModalOpen,
+				modalOpenD,
+				setModalOpenD,
 				editDirectory,
 				setEditDirectory,
 				addDirectory,

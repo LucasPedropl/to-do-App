@@ -1,11 +1,10 @@
 import {Outlet } from 'react-router-dom';
 import MenuEsquerdo from '../../components/menuEsquerdo';
 import MenuDireito from '../../components/menuDireito';
-import { Container, ContentWrapper } from './StyledComponents';
-import Forms from '../../components/formCadastros';
-import PopUpDelete from '../../components/deletePopUp';
+import { Container, ContainerPrincipal, ContentWrapper } from './StyledComponents';
 import NavBar from '../../components/navBar';
 import PageNav from '../../components/pageNav';
+import Footer from '../../components/footer';
 
 
 
@@ -14,10 +13,12 @@ const BasePage = () => {
 		<Container>
 			<MenuEsquerdo />
 			<ContentWrapper>
-				{/* <PopUpDelete tipo="one" /> */}
 				<NavBar />
-				<PageNav/>
-				<Outlet />
+				<PageNav />
+				<ContainerPrincipal>
+					<Outlet />
+				</ContainerPrincipal>
+				<Footer />
 			</ContentWrapper>
 			<MenuDireito />
 		</Container>

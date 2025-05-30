@@ -115,7 +115,7 @@ export const ProgressBarLabel = styled.span`
 
 export const ProgressBarFill = styled.div`
 	height: 100%;
-	width: ${({ percent }) => percent}%;
+	width: ${({ $percent }) => $percent}%;
 	background: #7c3aed;
 	transition: width 0.4s;
 `;

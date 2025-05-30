@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useDirectory } from '../../context/DirectoryContext';
+import { useTarefa } from '../../context/TarefasContext';
 import MenuItem from '../menuItem';
 import Forms from '../formCadastros';
 import PopUpDelete from '../deletePopUp';
 import { Container, Titulo, Botao, MenuArea, AccordionContent, SetaIconeSVG, CadastroCategoria } from './StyledComponents';
 
 const MenuEsquerdo = () => {
-	const { directories, modalOpen, setModalOpen, setEditDirectory, deleteDirectory } = useDirectory();
+	const { directories, modalOpenD, setModalOpenD, setEditDirectory, deleteDirectory } = useDirectory();
+	const { modalOpenT, setModalOpenT } = useTarefa();
 	const [open, setOpen] = useState(false);
 	const [deletePopUpOpen, setDeletePopUpOpen] = useState(false);
 	const [directoryToDelete, setDirectoryToDelete] = useState(null);
@@ -30,7 +32,8 @@ const MenuEsquerdo = () => {
 	return (
 		<Container>
 			<Titulo>TO-DO LIST</Titulo>
-			<Botao>Add new task</Botao>
+			<Botao onClick={() => setModalOpenT(true)}>Add new task</Botao>
+			{modalOpenT && <Forms tipo="task" onClose={() => setModalOpenT(false)} />}
 			<MenuArea>
 				<MenuItem url="/today">Today's Tasks</MenuItem>
 				<MenuItem url="/">All Tasks</MenuItem>
@@ -53,7 +56,7 @@ const MenuEsquerdo = () => {
 									style={{ cursor: 'pointer', color: '#7c3aed' }}
 									onClick={() => {
 										setEditDirectory(dir);
-										setModalOpen(true);
+										setModalOpenD(true);
 									}}
 								/>
 								<i className="bi bi-trash" style={{ cursor: 'pointer', color: '#e11d48' }} onClick={() => handleDeleteClick(dir)} />
@@ -65,13 +68,13 @@ const MenuEsquerdo = () => {
 					<CadastroCategoria
 						onClick={() => {
 							setEditDirectory(null);
-							setModalOpen(true);
+							setModalOpenD(true);
 						}}
 					>
 						+ New
 					</CadastroCategoria>
 				)}
-				{modalOpen && <Forms tipo="directory" onClose={() => setModalOpen(false)} />}
+				{modalOpenD && <Forms tipo="directory" onClose={() => setModalOpenD(false)} />}
 				{deletePopUpOpen && <PopUpDelete tipo="one" onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} />}
 			</MenuArea>
 		</Container>

@@ -29,21 +29,21 @@ const MenuDireito = () => {
 					<p>3/6</p>
 				</ProgressBarLabel>
 				<ProgressBarContainer>
-					<ProgressBarFill percent={percent} />
+					<ProgressBarFill $percent={percent} />
 				</ProgressBarContainer>
 				<ProgressBarLabel>
 					<p>Today tasks</p>
 					<p>3/6</p>
 				</ProgressBarLabel>
 				<ProgressBarContainer>
-					<ProgressBarFill percent={percent} />
+					<ProgressBarFill $percent={percent} />
 				</ProgressBarContainer>
 				<ProgressBarLabel>
 					<p>Important tasks</p>
 					<p>3/6</p>
 				</ProgressBarLabel>
 				<ProgressBarContainer>
-					<ProgressBarFill percent={percent} />
+					<ProgressBarFill $percent={percent} />
 				</ProgressBarContainer>
 			</ProgressBarArea>
 			<DeleteArea>
