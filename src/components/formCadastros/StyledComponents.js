@@ -30,10 +30,9 @@ export const Svg = styled.svg`
 `;
 
 export const Label = styled.label`
-	font-size: clamp(0.8rem, 2vw, 1.0rem);
+	font-size: clamp(0.8rem, 2vw, 1rem);
 	color: #475569;
 	margin-bottom: 0.4rem;
-	
 `;
 
 export const TextInput = styled.input`
@@ -134,7 +133,7 @@ export const Botao = styled.button`
 	background-color: #7c3aed;
 	border: none;
 	padding: 15px;
-	width: ${({tipo}) => tipo === 'directory' ? '20%' : '100%'};
+	width: ${({ $tipo }) => ($tipo === 'directory' ? '20%' : '100%')};
 	margin-top: 0.7rem;
 	color: white;
 	border-radius: 0.5rem;
@@ -147,4 +146,17 @@ export const Botao = styled.button`
 		transform: scale(0.95);
 		transition: transform 0.1s;
 	}
+`;
+
+export const Overlay = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
 `;

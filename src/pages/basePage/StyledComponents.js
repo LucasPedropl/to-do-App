@@ -9,10 +9,10 @@ export const Container = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-	margin-left: 18%;
-	margin-right: 18%;
+	margin-left: 19%;
+	margin-right: 19%;
 	height: 100vh;
 	overflow-y: auto;
-    width: 100%;
-    align-items: center;
+	width: 100%;
+	align-items: center;
 `;

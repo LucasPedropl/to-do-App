@@ -3,7 +3,9 @@ import MenuEsquerdo from '../../components/menuEsquerdo';
 import MenuDireito from '../../components/menuDireito';
 import { Container, ContentWrapper } from './StyledComponents';
 import Forms from '../../components/formCadastros';
+import PopUpDelete from '../../components/deletePopUp';
 import NavBar from '../../components/navBar';
+import PageNav from '../../components/pageNav';
 
 
 
@@ -12,7 +14,9 @@ const BasePage = () => {
 		<Container>
 			<MenuEsquerdo />
 			<ContentWrapper>
+				{/* <PopUpDelete tipo="one" /> */}
 				<NavBar />
+				<PageNav/>
 				<Outlet />
 			</ContentWrapper>
 			<MenuDireito />
