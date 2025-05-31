@@ -1,4 +1,5 @@
-const api = 'https://api-todolist-1-ot3w.onrender.com';
+//const api = 'https://api-todolist-1-ot3w.onrender.com';
+const api = 'http://localhost:3000';
 
 class DirectoryServices {
 	async getDirectories() {

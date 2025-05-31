@@ -1,4 +1,5 @@
-const api = 'https://api-todolist-1-ot3w.onrender.com';
+//const api = 'https://api-todolist-1-ot3w.onrender.com';
+const api = 'http://localhost:3000';
 
 class TarefaServices {
 	async getTarefas() {
@@ -15,28 +16,28 @@ class TarefaServices {
 		return res.json();
 	}
 
-    async updateTarefa(id, data){
-        const res = await fetch(`${api}/tarefaUpdate/${id}`, {
+	async updateTarefa(id, data) {
+		const res = await fetch(`${api}/tarefaUpdate/${id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(data),
 		});
-        return res.json()
-    }
+		return res.json();
+	}
 
-    async deleteTarefa(id){
-        const res = await fetch(`${api}/tarefaDelete/${id}`,{
-            method: 'DELETE'
-        })
-        return res.json()
-    }
+	async deleteTarefa(id) {
+		const res = await fetch(`${api}/tarefaDelete/${id}`, {
+			method: 'DELETE',
+		});
+		return res.json();
+	}
 
-    async deleteAllTarefa(){
-        const res = await fetch(`${api}/tarefaDeleteAll`,{
-            method: 'DELETE'
-        })
-        return res.json()
-    }
+	async deleteAllTarefa() {
+		const res = await fetch(`${api}/tarefaDeleteAll`, {
+			method: 'DELETE',
+		});
+		return res.json();
+	}
 }
 
 const tarefaServices = new TarefaServices();

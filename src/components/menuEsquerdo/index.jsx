@@ -50,17 +50,19 @@ const MenuEsquerdo = () => {
 					{directories.map((dir) => (
 						<MenuItem key={dir.id}>
 							{dir.name}
-							<span style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-								<i
-									className="bi bi-pencil"
-									style={{ cursor: 'pointer', color: '#7c3aed' }}
-									onClick={() => {
-										setEditDirectory(dir);
-										setModalOpenD(true);
-									}}
-								/>
-								<i className="bi bi-trash" style={{ cursor: 'pointer', color: '#e11d48' }} onClick={() => handleDeleteClick(dir)} />
-							</span>
+							{dir.name !== 'main' && (
+								<span style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
+									<i
+										className="bi bi-pencil"
+										style={{ cursor: 'pointer', color: '#7c3aed' }}
+										onClick={() => {
+											setEditDirectory(dir);
+											setModalOpenD(true);
+										}}
+									/>
+									<i className="bi bi-trash" style={{ cursor: 'pointer', color: '#e11d48' }} onClick={() => handleDeleteClick(dir)} />
+								</span>
+							)}
 						</MenuItem>
 					))}
 				</AccordionContent>

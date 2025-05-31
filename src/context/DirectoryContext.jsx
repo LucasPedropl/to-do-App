@@ -13,7 +13,7 @@ export function DirectoryProvider({ children }) {
 	const [modalOpenD, setModalOpenD] = useState(false);
 	const [editDirectory, setEditDirectory] = useState(null);
 
-	// Carrega diretórios ao iniciar
+	
 	useEffect(() => {
 		fetchDirectories();
 	}, []);
@@ -26,14 +26,14 @@ export function DirectoryProvider({ children }) {
 	async function addDirectory(data) {
 		const tempId = Date.now();
 		const tempDirectory = { id: tempId, ...data };
-		setDirectories((prev) => [...prev, tempDirectory]); // Adiciona imediatamente
+		setDirectories((prev) => [...prev, tempDirectory]); 
 
 		try {
 			await directoryServices.createDirectory(data);
-			// Atualize a lista com o que veio da API (ou faça fetchDirectories())
+			
 			fetchDirectories();
 		} catch {
-			// Se der erro, remova o temporário
+			
 			setDirectories((prev) => prev.filter((d) => d.id !== tempId));
 		}
 	}
@@ -46,7 +46,7 @@ export function DirectoryProvider({ children }) {
 			await directoryServices.updateDirectory(id, data);
 			fetchDirectories();
 		} catch {
-			// Se der erro, volta ao antigo
+			
 			setDirectories((prev) => prev.map((d) => (d.id === id ? oldDirectory : d)));
 		}
 	}
@@ -59,7 +59,7 @@ export function DirectoryProvider({ children }) {
 			await directoryServices.deleteDirectory(id);
 			fetchDirectories();
 		} catch {
-			// Se der erro, volta ao antigo
+			
 			setDirectories(oldDirectories);
 		}
 	}

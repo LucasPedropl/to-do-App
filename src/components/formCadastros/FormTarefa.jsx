@@ -9,6 +9,16 @@ const CloseIcon = (
 	</Svg>
 );
 
+const toInputDate = (dateString) => {
+	if (!dateString) return '';
+	if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return dateString;
+	const date = new Date(dateString);
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	const day = String(date.getDate()).padStart(2, '0');
+	return `${year}-${month}-${day}`;
+};
+
 const FormTarefa = ({ onClose }) => {
 	const { addTarefa, updateTarefa, editTarefa, setEditTarefa } = useTarefa();
 	const { directories } = useDirectory();
@@ -20,20 +30,36 @@ const FormTarefa = ({ onClose }) => {
 	const [directoryId, setDirectoryId] = useState('');
 
 	useEffect(() => {
-		if (editTarefa) setTitle(editTarefa.title);
-		else setTitle('');
-		if (editTarefa) setDate(editTarefa.date);
-		else setDate('');
-		if (editTarefa) setDescription(editTarefa.description);
-		else setDescription('');
-		if (editTarefa) setImportant(editTarefa.important);
-		else setImportant(false);
-		if (editTarefa) setCompleted(editTarefa.completed);
-		else setCompleted(false);
-	}, [editTarefa]);
+		if (editTarefa) {
+			setTitle(editTarefa.title);
+			setDate(toInputDate(editTarefa.date)); 
+			setDescription(editTarefa.description);
+			setImportant(editTarefa.important);
+			setCompleted(editTarefa.completed);
+			setDirectoryId(editTarefa.directoryId?.toString() || '');
+		} else {
+			setTitle('');
+			setDate('');
+			setDescription('');
+			setImportant(false);
+			setCompleted(false);
+
+			const mainDir = directories.find((d) => d.name === 'main');
+			setDirectoryId(mainDir ? mainDir.id.toString() : '');
+		}
+	}, [editTarefa, directories]);
 
 	const SubmitTarefa = async (e) => {
 		e.preventDefault();
+		console.log({
+			title,
+			date,
+			description,
+			important,
+			completed,
+			directoryId,
+		});
+
 		onClose();
 		try {
 			if (editTarefa) {
@@ -59,14 +85,11 @@ const FormTarefa = ({ onClose }) => {
 					<Label htmlFor="title">Title</Label>
 					<TextInput required type="text" name="title" placeholder="Ex, study for the test" value={title} onChange={(e) => setTitle(e.target.value)} />
 					<Label htmlFor="Date">Date</Label>
-					<TextInput required type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
+					<TextInput required type="date" name="date" value={date || ''} onChange={(e) => setDate(e.target.value)} />
 					<Label htmlFor="description">Description (optional)</Label>
 					<TextArea placeholder="Ex, study for the test" value={description} onChange={(e) => setDescription(e.target.value)} />
 					<Label htmlFor="directory">Select a directory</Label>
 					<Select required value={directoryId} onChange={(e) => setDirectoryId(e.target.value)}>
-						<option value="" disabled>
-							Selecione um diretório
-						</option>
 						{directories.map((dir) => (
 							<option key={dir.id} value={dir.id}>
 								{dir.name}
@@ -74,11 +97,11 @@ const FormTarefa = ({ onClose }) => {
 						))}
 					</Select>
 					<RadioGroup>
-						<InputCheck checked={important} onChange={() => setImportant((v) => !v)} />
+						<InputCheck checked={important} onClick={() => setImportant((v) => !v)} />
 						<Label onClick={() => setImportant((v) => !v)}>Mark as important</Label>
 					</RadioGroup>
 					<RadioGroup>
-						<InputCheck checked={completed} onChange={() => setCompleted((v) => !v)} />
+						<InputCheck checked={completed} onClick={() => setCompleted((v) => !v)} />
 						<Label onClick={() => setCompleted((v) => !v)}>Mark as completed</Label>
 					</RadioGroup>
 					<Botao>Add a task</Botao>

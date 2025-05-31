@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+	user-select: none;
 	width: 30%;
 	padding: 2rem 1.5rem;
 	background-color: #e2e8f0;
@@ -115,19 +116,20 @@ export const InputCheck = styled.div`
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	margin-right: 8px;
 	cursor: pointer;
 	background: #d7dfe9;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	transition: border-color 0.2s;
+	
 
 	&::after {
 		content: '';
 		display: ${({ checked }) => (checked ? 'block' : 'none')};
-		width: 7px;
-		height: 7px;
+		width: 10px;
+		height: 10px;
 		background: #f43f5e;
 		border-radius: 50%;
 	}

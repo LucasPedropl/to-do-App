@@ -6,7 +6,7 @@ export const Container = styled.div`
 	text-align: center;
 	height: 5vh;
 	width: 100%;
-	margin-top: 10vh;
+	margin-top: auto;
 	p {
 		color: #475569;
 		font-weight: bold;

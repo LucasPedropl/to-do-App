@@ -4,7 +4,7 @@ export const Container = styled.div`
 	width: 30vw;
 	height: 20vh;
 	padding: 1rem;
-	background-color: rgb(55, 115, 193);
+	background-color: #e2e8f0;
 	border-radius: 10px;
 	color: rgb(94, 94, 94);
 	h1 {
@@ -12,14 +12,14 @@ export const Container = styled.div`
 	}
 	div {
 		width: 100%;
-		border: 1px solid red;
+
 		display: flex;
 		justify-content: end;
 		text-align: center;
 		gap: 1rem;
 		p {
 			cursor: pointer;
-			border: 1px solid red;
+
 			display: flex;
 			text-align: center;
 		}

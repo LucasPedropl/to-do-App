@@ -2,13 +2,13 @@ import CardTarefa from '../../components/cardTarefa';
 import { useTarefa } from '../../context/TarefasContext';
 import { useDirectory } from '../../context/DirectoryContext';
 
-const ImportantTask = () => {
+const UncompletedTasks = () => {
 	const { tarefas, deleteTarefa, setEditTarefa, setModalOpenT, updateTarefa } = useTarefa();
 	const { directories } = useDirectory();
-	const tarefasImportantes = tarefas.filter((task) => task.important === true);
+	const tarefasIncompletas = tarefas.filter((task) => task.completed === false);
 	return (
 		<>
-			{tarefasImportantes.map((task) => {
+			{tarefasIncompletas.map((task) => {
 				const categoria = directories.find((dir) => dir.id === task.directoryId)?.name || 'Sem categoria';
 				return (
 					<CardTarefa
@@ -36,4 +36,4 @@ const ImportantTask = () => {
 	);
 };
 
-export default ImportantTask;
+export default UncompletedTasks;

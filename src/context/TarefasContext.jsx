@@ -59,6 +59,16 @@ export function TarefaProvider({ children }) {
 		}
 	}
 
+	async function deleteAllTarefas() {
+		const oldTarefa = tarefas;
+		try {
+			await tarefaServices.deleteAllTarefa();
+			fetchTarefas();
+		} catch {
+			setTarefas(oldTarefa);
+		}
+	}
+
 	return (
 		<TarefaContext.Provider
 			value={{
@@ -70,6 +80,7 @@ export function TarefaProvider({ children }) {
 				addTarefa,
 				updateTarefa,
 				deleteTarefa,
+				deleteAllTarefas,
 			}}
 		>
 			{children}
